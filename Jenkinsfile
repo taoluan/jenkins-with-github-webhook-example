@@ -11,7 +11,7 @@ pipeline {
   }
     stage('Build') {
       steps {
-        bat 'docker build --tag ${IMAGE_NAME}:${IMAGE_TAG} .'
+        bat 'docker build --tag luan/jenkins-example-laravel-demo:latest .'
       }
     }
     stage('Login') {
