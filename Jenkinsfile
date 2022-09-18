@@ -5,14 +5,14 @@ pipeline {
   }
   environment {
     HEROKU_API_KEY = credentials('heroku-api-key')
-    IMAGE_NAME = 'darinpope/jenkins-example-laravel'
+    IMAGE_NAME = 'darinpope/jenkins-example-laravel-demo'
     IMAGE_TAG = 'latest'
     APP_NAME = 'jenkins-example-laravel-demo'
   }
   stages {
     stage('Build') {
       steps {
-        bat 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+        bat 'docker build --tag $IMAGE_NAME:$IMAGE_TAG .'
       }
     }
     stage('Login') {
