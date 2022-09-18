@@ -17,7 +17,7 @@ pipeline {
     }
     stage("Login") {
       steps {
-        bat 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin https://jenkins-example-laravel-demo.herokuapp.com/'
+        bat 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin https://jenkins-example-laravel-demo.herokuapp.com/v2/'
       }
     }
     stage("Push to Heroku registry") {
