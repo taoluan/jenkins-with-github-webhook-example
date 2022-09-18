@@ -9,14 +9,6 @@ pipeline {
     IMAGE_TAG = 'latest'
     APP_NAME = 'jenkins-example-laravel-demo'
   }
-  stages {
-    stage("Env Build Number"){
-      steps{
-          echo "The build number is $HEROKU_API_KEY"
-          echo "You can also use ${IMAGE_TAG} -> ${IMAGE_NAME}"
-      }
-    }
-
     stage('Build') {
       steps {
         bat 'docker build --tag ${IMAGE_NAME}:${IMAGE_TAG} .'
@@ -24,21 +16,21 @@ pipeline {
     }
     stage('Login') {
       steps {
-        bat 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com'
+        bat 'echo ${HEROKU_API_KEY} | docker login --username=_ --password-stdin registry.heroku.com'
       }
     }
     stage('Push to Heroku registry') {
       steps {
         bat '''
-          docker tag $IMAGE_NAME:$IMAGE_TAG registry.heroku.com/$APP_NAME/web
-          docker push registry.heroku.com/$APP_NAME/web
+          docker tag ${IMAGE_NAME}:${IMAGE_TAG} registry.heroku.com/${APP_NAME}/web
+          docker push registry.heroku.com/${APP_NAME}/web
         '''
       }
     }
     stage('Release the image') {
       steps {
         bat '''
-          heroku container:release web --app=$APP_NAME
+          heroku container:release web --app=${APP_NAME}
         '''
       }
     }
