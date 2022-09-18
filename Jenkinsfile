@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     HEROKU_API_KEY = credentials("heroku-api-key")
-    IMAGE_NAME = "jenkins-example-laravel"
+    IMAGE_NAME = "jenkins-example-laravel-demo"
     IMAGE_TAG = "latest"
     APP_NAME = "jenkins-example-laravel-demo"
   }
@@ -17,7 +17,7 @@ pipeline {
     }
     stage("Login") {
       steps {
-        bat "echo ${HEROKU_API_KEY} | docker login --username=_ --password-stdin registry.heroku.com"
+        bat 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com'
       }
     }
     stage("Push to Heroku registry") {
