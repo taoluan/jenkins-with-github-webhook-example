@@ -12,14 +12,14 @@ pipeline {
   stages {
     stage("Env Build Number"){
       steps{
-          echo "The build number is ${env.HEROKU_API_KEY}"
-          echo "You can also use \${IMAGE_TAG} -> ${IMAGE_NAME}"
+          echo "The build number is $HEROKU_API_KEY"
+          echo "You can also use ${IMAGE_TAG} -> ${IMAGE_NAME}"
       }
     }
 
     stage('Build') {
       steps {
-        bat 'docker build --tag $IMAGE_NAME:$IMAGE_TAG .'
+        bat 'docker build --tag ${IMAGE_NAME}:${IMAGE_TAG} .'
       }
     }
     stage('Login') {
