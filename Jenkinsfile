@@ -22,17 +22,17 @@ pipeline {
     }
     stage("Push to Heroku registry") {
       steps {
-        bat """`
-          docker tag $IMAGE_NAME:$IMAGE_TAG registry.heroku.com/$APP_NAME/web`
+        bat "
+          docker tag $IMAGE_NAME:$IMAGE_TAG registry.heroku.com/$APP_NAME/web
           docker push registry.heroku.com/$APP_NAME/web
-        """
+        "
       }
     }
     stage("Release the image") {
       steps {
-        bat """
+        bat "
           heroku container:release web --app=$APP_NAME
-        """
+        "
       }
     }
   }
