@@ -10,6 +10,10 @@ pipeline {
     APP_NAME = 'jenkins-example-laravel-demo'
   }
   stages {
+    steps {
+          echo "Database engine is ${IMAGE_NAME}"
+          echo "DISABLE_AUTH is ${HEROKU_API_KEY}"
+    }
     stage('Build') {
       steps {
         bat 'docker build -t jenkins-example-laravel:latest .'
