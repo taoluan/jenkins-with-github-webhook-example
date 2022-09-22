@@ -30,9 +30,7 @@ pipeline {
     }
     stage("Release the image") {
       steps {
-          bat '''
-            heroku container:release web --app=jenkins-example-laravel-demo
-          '''
+          bat "heroku container:release web --app=jenkins-example-laravel-demo"
         }
     }
   }
